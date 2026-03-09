@@ -1,0 +1,31 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Get current filename from URL
+    let path = window.location.pathname;
+    let page = path.split("/").pop();
+
+    // Default to index.html if empty (like when visiting the root /)
+    if (!page || page === "") {
+        page = "index.html";
+    }
+
+    // Mapping rules based on the hrefs
+    const navMapping = {
+        "index.html": "nav-home",
+        "about.html": "nav-about",
+        "academics.html": "nav-academics",
+        "admission.html": "nav-admission",
+        "campus.html": "nav-campus"
+    };
+
+    const activeId = navMapping[page];
+    if (activeId) {
+        // Remove active class from all nav items
+        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+
+        // Add active class to the current page's nav item
+        const activeNav = document.getElementById(activeId);
+        if (activeNav) {
+            activeNav.classList.add("active");
+        }
+    }
+});
